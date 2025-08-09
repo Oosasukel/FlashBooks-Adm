@@ -82,34 +82,198 @@
   font-size: 0.9rem;
 }
 
-.chapter {
-  background-color: #2d2d2d;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-sizing: border-box;
+/* Estilos para a interface mobile dos capítulos */
+.book-preview-chapters-mobile {
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.chapter h3 {
+/* Indicador de progresso */
+.chapter-progress {
+  margin-bottom: 20px;
+}
+
+.chapter-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.chapter-number {
   color: #ffffff;
-  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.chapter-total {
+  color: #888888;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #333333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1e88e5, #42a5f5);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Container do capítulo */
+.chapter-container {
+  background-color: #2d2d2d;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-content-mobile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chapter-title {
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  padding: 20px 0 0 0;
   font-size: 1.1rem;
   font-weight: 700;
-  text-align: left;
 }
 
-.chapter-content {
+.chapter-scroll-content {
+  flex: 1;
+  padding: 0 8px 20px 8px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
 }
 
+.chapter-scroll-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chapter-scroll-content::-webkit-scrollbar-track {
+  background: #252525;
+}
+
+.chapter-scroll-content::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 3px;
+}
+
+.chapter-scroll-content::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* Navegação */
+.chapter-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 8px;
+}
+
+.nav-button {
+  background-color: #1e88e5;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
+  flex-shrink: 0;
+}
+
+.nav-button svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4);
+}
+
+.nav-button:disabled {
+  background-color: #333333;
+  color: #666666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.chapter-dots {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #555555;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  display: block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.chapter-dot:hover {
+  background-color: #777777;
+}
+
+.chapter-dot.active {
+  background-color: #1e88e5;
+  transform: scale(1.2);
+  border-radius: 50%;
+}
+
+/* Estilos existentes para conteúdo */
 .paragraph {
   color: #e0e0e0;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.2;
   font-size: 0.9rem;
   text-align: left;
+  letter-spacing: 1px;
 }
 
 .key-point {
@@ -119,10 +283,10 @@
 
 .key-point-text {
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.2;
   font-size: 0.9rem;
   text-align: left;
-  letter-spacing: 0.3px;
+  letter-spacing: 1px;
 }
 
 .key-point-text.quote {
@@ -146,4 +310,27 @@
   color: #e0e0e0;
   font-size: 0.8rem;
   opacity: 0.8;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .book-preview-chapters-mobile {
+    margin: 16px -8px 0 -8px;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .chapter-container {
+    height: 500px;
+  }
+
+  .nav-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chapter-dot {
+    width: 6px;
+    height: 6px;
+  }
 }
