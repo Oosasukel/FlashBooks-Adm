@@ -44,6 +44,22 @@
   font-size: 0.9rem;
 }
 
+.book-preview-info .reading-time {
+  color: #bdbdbd;
+  margin: 0 0 0.75rem 0;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.9;
+}
+
+.book-preview-info .reading-time::before {
+  content: '⏱️';
+  font-size: 0.9rem;
+}
+
 .book-preview-info .description {
   color: #e0e0e0;
   line-height: 1.6;

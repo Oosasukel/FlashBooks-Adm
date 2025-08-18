@@ -14,6 +14,25 @@ export function BookPreview({ book }: BookPreviewProps) {
     book.categoryIds.includes(category.id)
   );
 
+  const WORDS_PER_MINUTE = 200;
+
+  const readingTimeInMinutes = Math.max(
+    1,
+    Math.ceil(
+      book.chapters.reduce((chapterSum, chapter) => {
+        const chapterWords = chapter.content.reduce((contentSum, content) => {
+          if (content.type === ContentType.PARAGRAPH) {
+            const words = content.text.trim().split(/\s+/).length;
+            return contentSum + words;
+          }
+          return contentSum;
+        }, 0);
+        const titleWords = chapter.title.trim().split(/\s+/).length;
+        return chapterSum + chapterWords + titleWords;
+      }, 0) / WORDS_PER_MINUTE
+    )
+  );
+
   const nextChapter = () => {
     if (currentChapterIndex < book.chapters.length - 1) {
       setCurrentChapterIndex(currentChapterIndex + 1);
@@ -51,6 +70,10 @@ export function BookPreview({ book }: BookPreviewProps) {
         <div className="book-preview-info">
           <h1>{book.title}</h1>
           <p className="author">{book.author}</p>
+          <p className="reading-time">
+            Tempo de leitura: {readingTimeInMinutes}{' '}
+            {readingTimeInMinutes === 1 ? 'minuto' : 'minutos'}
+          </p>
           <div className="categories">
             {bookCategories.map((category) => (
               <span key={category.id} className="category-tag">
